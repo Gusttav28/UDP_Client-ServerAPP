@@ -3,9 +3,13 @@ package consoleapp_udp_servidor;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 import javax.swing.border.Border;
 import javax.swing.plaf.DimensionUIResource;
 import java.awt.BorderLayout;
@@ -28,6 +32,7 @@ public class UPD_ServerFrame extends JFrame{
 class serverPanel extends JPanel{
     private JTextArea textArea;
     private JButton sendButton;
+    private JScrollPane ScrollBar;
     public serverPanel(){
         setLayout(new BorderLayout());
 
@@ -37,7 +42,7 @@ class serverPanel extends JPanel{
         // BufferedReader in = new BufferedReader(inputStreamReader);
 
 
-        JLabel testlbl = new JLabel("ServertUDP");
+        JLabel testlbl = new JLabel("ServertUDP - Cliente Wait");
         textArea = new JTextArea();
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
@@ -45,6 +50,10 @@ class serverPanel extends JPanel{
         // textArea.setBounds(1, 10, 200, 500);
         sendButton = new JButton("Send");
         textArea.setBounds(150, 100, 300, 50);
+        ScrollBar = new JScrollPane(textArea);
+        ScrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        add(ScrollBar, BorderLayout.EAST);
+        
         // this.setBackground(Color.BLACK);
         add(testlbl);
         add(textArea, BorderLayout.CENTER);
@@ -77,7 +86,9 @@ class serverPanel extends JPanel{
                    address = pack.getAddress();
                    comMessage = "";
                    if(message.startsWith("fin")){
-                        comMessage = "Bye client";
+                        comMessage = "Bye Client";
+                        // JOptionPane.showMessageDialog(null, "we said to the client: Bye");
+
                    }
                    byte_messages2 = comMessage.getBytes();
     
